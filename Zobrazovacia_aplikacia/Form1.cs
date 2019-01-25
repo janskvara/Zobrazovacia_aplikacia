@@ -56,6 +56,13 @@ namespace Zobrazovacia_aplikacia
             short slot = short.Parse(key.GetValue("SLOT_PLC").ToString());
             string rada_plc = key.GetValue("RADA_PLC").ToString();
 
+            time.Text = DateTime.Now.ToString("HH:mm", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+            date.Text = DateTime.Now.ToShortDateString();
+
+            String display = key.GetValue("DISPLAY").ToString();
+            showOnScreen(display, true);
+
+
             try
             {
                 Plc plc = new Plc(ConverterCPU(rada_plc), ip, rack, slot);
@@ -115,13 +122,6 @@ namespace Zobrazovacia_aplikacia
 
             if (trend_plus_P == false) Trend_P.ForeColor = Color.Red;
             else Trend_P.ForeColor = Color.Green;
-
-            time.Text = DateTime.Now.ToString("HH:mm", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-            date.Text = DateTime.Now.ToShortDateString();
-            
-            String display = key.GetValue("DISPLAY").ToString();
-            showOnScreen(display, true);
-
 
         }
         private void Timer2_Tick(object Sender, EventArgs e)
